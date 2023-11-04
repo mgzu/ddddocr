@@ -13,8 +13,7 @@ RUN cargo build --release && cp target/release/ddddocr /home \
 # -----------------
 # Final Stage
 # -----------------
-# FROM ubuntu:22.04
-FROM debian:12
+FROM ubuntu:22.04
 
 COPY --from=cargo-build /home /home
 EXPOSE 9898
