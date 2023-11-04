@@ -8,7 +8,7 @@ COPY Cargo.toml /home/Cargo.toml
 COPY model /home/model
 WORKDIR /home
 RUN cargo build --release && cp target/release/ddddocr /home \
-&& cp ./target/release/build/onnxruntime-sys-*/out/onnxruntime/onnxruntime-linux-x64-1.8.1/lib/libonnxruntime.so.* /home \
+&& cp ./target/release/build/onnxruntime-sys-*/out/onnxruntime/onnxruntime-linux-x64-*/lib/libonnxruntime.so.* /home \
 && rm -rf Cargo.* src target
 # -----------------
 # Final Stage
