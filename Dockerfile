@@ -1,7 +1,7 @@
 # -----------------
 # Cargo Build Stage
 # -----------------
-FROM rust:latest as cargo-build
+FROM rust:latest AS cargo-build
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 COPY src /home/src
 COPY Cargo.toml /home/Cargo.toml
@@ -17,4 +17,6 @@ FROM ubuntu:22.04
 
 COPY --from=cargo-build /home /home
 EXPOSE 9898
-ENTRYPOINT ["sh", "-c", "cd /home && LD_LIBRARY_PATH=/home/ ./ddddocr -a 0.0.0.0 --ocr"]
+ENV DDDDOCR_HOST="0.0.0.0"
+ENV DDDDOCR_FEATURES="--ocr"
+ENTRYPOINT ["sh", "-c", "cd /home && LD_LIBRARY_PATH=/home/ ./ddddocr -a ${DDDDOCR_HOST} ${DDDDOCR_FEATURES}"]
